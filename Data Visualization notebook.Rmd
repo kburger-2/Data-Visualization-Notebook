@@ -105,6 +105,93 @@ Model, trans, fl, drv, and class are all qualitative variables. Displ, year, cyl
 
 ##3.4 Common Problems
 
+How to Troubleshoot R Problems  
+> Start by carefully comparing the code you are running to the code in the book  
+> If the left-hand side of the console has a + it means that R doesn't think the expression is finished  
+> If using ggplot2 make sure the + is at the end of a line, not the beginning  
+> Using ?"Function name" if you are stuck on a function, check the examples  
+> If this doesn't help, carefully read the error code for fixes
+
+
+##3.5 Facets
+
+A way to add additional variables with aesthetics  
+Facets are subplots that each display one subset of the data
+
+>Structure of a facet  
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+  
+###3.5.1 Excersizes
+1. If the facet on a continuous variable it may produce too many subsets or the code may not run.
+2. Empty cells in a plot with facets indicate that there are no data point there.
+3. The following code makes two graphics, one with horizontal facets and one with vertical facets
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+4. The advanteges to using faceting instead of color aesthetic is that its color blindness friendly, and you don't have to worry about having colors that are too similar or "ugly" graphics
+5. nrow, ncol
+6. Facet_grid() is helpful when you have two discrete variables 
+
+
+##3.6 Geometric Objects
+
+Geom is the geometrical object that a plot uses to represent data, and people often describe plots by the type of geom that the plot uses
+
+###3.6.1 Exercises
+1. line chart: `geom_line()`, boxplot: `geom_boxplot()`, histogram: `geom_histogram()`, area chart: `geom_area()`
+2. This code will produce a scatter plot, with color assigned to the variable drv
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+3. show.legend = FALSE would hide the legend, if you remove it the legend will be default and will stay on the graph
+4. se argument adds standard errors to the plot
+5. These two plots will look the same, they are using the same data and a similar code.
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+```
+6. 
+
+##3.7 Statistical Transformations
+> Bar charts, histograms, and frequency polygons bin your data and then plot bin counts, the number of points that fall in each bin.  
+> Smoothers fit a model to your data and then plot predictions from the model.  
+> Boxplots compute a robust summary of the distribution and then display a specially formatted box.
+
+###3.7.1 Exercises
+1. 
+2. geom_col() and geom_bar() have different default stats so they alter the data.
+3. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
